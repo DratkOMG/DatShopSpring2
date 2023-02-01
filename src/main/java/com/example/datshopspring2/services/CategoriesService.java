@@ -8,4 +8,6 @@ public interface CategoriesService {
     Categories findByCategoriesId(Long categoriesId);
 
     List<Categories> findAll();
+
+    void addNewCategory(String category);
 }

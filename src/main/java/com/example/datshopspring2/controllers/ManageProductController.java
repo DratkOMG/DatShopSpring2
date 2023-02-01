@@ -111,4 +111,12 @@ public class ManageProductController {
         model.addAttribute("listCategory", categoriesList);
         return "managerViews/editProduct";
     }
+
+    @PostMapping("/add-category")
+    private String addCategory(String category) {
+        categoriesService.addNewCategory(category);
+        return "redirect:/manage-product";
+    }
+
+
 }

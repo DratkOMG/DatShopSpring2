@@ -23,4 +23,12 @@ public class CategoriesServiceImpl implements CategoriesService {
     public List<Categories> findAll() {
         return categoriesRepository.findAll();
     }
+
+    @Override
+    public void addNewCategory(String category) {
+        Categories categories = Categories.builder()
+                .categoriesName(category)
+                .build();
+        categoriesRepository.save(categories);
+    }
 }

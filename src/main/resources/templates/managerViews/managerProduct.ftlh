@@ -76,7 +76,7 @@
 <div id="addNewCategoryBook" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="" method="post">
+            <form action="/manage-product/add-category" method="post">
 
                 <div class="modal-header">
                     <h4 class="modal-title">Add Category Book</h4>
