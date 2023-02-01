@@ -92,15 +92,10 @@ public class HomeController {
 
     @PostMapping("/load-more")
     @ResponseBody
-    private String loadMoreBook(@RequestParam String cid, @RequestParam Integer exits, Model model) {
+    private String loadMoreBook(@RequestParam Integer exits, Model model) {
         List<Book> bookList;
 
-        if (cid.isEmpty()) {
-            bookList = bookService.findNext3Book(exits);
-        } else {
-            long categoriesId = Long.parseLong(cid);
-            bookList = bookService.findNext3ByCategoriesId(exits, categoriesId);
-        }
+        bookList = bookService.findNext3Book(exits);
         StringBuffer stringBuffer = getStringBuffer(bookList);
 
         return stringBuffer.toString();
@@ -110,7 +105,7 @@ public class HomeController {
         StringBuffer stringBuffer = new StringBuffer();
 
         for (Book book : bookList) {
-            stringBuffer.append("<div class=\"col-12 col-md-6 col-lg-4\">\n" +
+            stringBuffer.append("<div class=\"product col-12 col-md-6 col-lg-4\">\n" +
                     "                        <div class=\"card\">\n" +
                     "                            <img class=\"\" src=\"" + book.getImage() + "\" alt=\"Book image\">\n" +
                     "                            <div class=\"card-body\">\n" +

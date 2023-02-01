@@ -1,6 +1,5 @@
 function loadMore() {
     let amount = document.getElementsByClassName("product").length;
-    let url = new URL(document.URL);
     $.ajax({
         url: "/home/load-more",
         type: "post",
