@@ -22,7 +22,7 @@
 
                 <form action="/profile/donate" method="post">
                     <span class="font-weight-bold">Balance: ${userProfile.balance} $</span><br>
-                    <input type="number" name="donate" class="form-control" placeholder="Donate"><br>
+                    <input type="number" name="donate" class="form-control" placeholder="Donate" required><br>
                     <#if errorDonate??>
                         <p class="ui-state-error-text">${errorDonate}</p>
                     </#if>
