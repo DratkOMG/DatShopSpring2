@@ -5,6 +5,7 @@ import com.example.datshopspring2.models.Book;
 import com.example.datshopspring2.models.Order;
 import com.example.datshopspring2.models.OrderInformation;
 import com.example.datshopspring2.repositories.AccountRepository;
+import com.example.datshopspring2.repositories.BookRepository;
 import com.example.datshopspring2.repositories.OrderInformationRepository;
 import com.example.datshopspring2.repositories.OrderRepository;
 import com.example.datshopspring2.services.OrderService;
@@ -22,6 +23,9 @@ public class OrderServiceImpl implements OrderService {
     private AccountRepository accountRepository;
     @Autowired
     private OrderInformationRepository orderInformationRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     @Override
     public List<Order> findAllOrderByUserId(Long id) {
@@ -50,6 +54,9 @@ public class OrderServiceImpl implements OrderService {
                     .quantity(quantity.get(i))
                     .build();
             orderInformationRepository.save(orderInformation);
+
+            bookList.get(i).setQuantitySold(bookList.get(i).getQuantitySold() + quantity.get(i));
+            bookRepository.save(bookList.get(i));
         }
     }
 }
