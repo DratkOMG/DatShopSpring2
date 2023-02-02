@@ -7,6 +7,8 @@ import com.example.datshopspring2.models.User;
 import com.example.datshopspring2.repositories.AccountRepository;
 import com.example.datshopspring2.services.AccountService;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -18,16 +20,30 @@ public class AccountServiceImpl implements AccountService {
     private AccountRepository accountRepository;
 
     @Override
-    public boolean signIn(String email, String password, String remember, Model model) {
+    public boolean signIn(String email, String password, String remember, Model model, HttpServletResponse httpServletResponse, HttpServletRequest request) {
         Account account = accountRepository.findAccountByEmailAndPassword(email, password);
         if (account != null) {
             if (remember != null) {
                 Cookie acc = new Cookie("acc", email);
                 Cookie pass = new Cookie("pass", password);
-                Cookie rem = new Cookie("remember", remember);
-                model.addAttribute(acc);
-                model.addAttribute(pass);
-                model.addAttribute(rem);
+                Cookie rem = new Cookie("rem", remember);
+                httpServletResponse.addCookie(acc);
+                httpServletResponse.addCookie(pass);
+                httpServletResponse.addCookie(rem);
+            } else {
+                Cookie[] cookies = request.getCookies();
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("acc")) {
+                        cookie.setMaxAge(0);
+                    }
+                    if (cookie.getName().equals("pass")) {
+                        cookie.setMaxAge(0);
+                    }
+                    if (cookie.getName().equals("rem")) {
+                        cookie.setMaxAge(0);
+                    }
+                    httpServletResponse.addCookie(cookie);
+                }
             }
         }
         return account != null;

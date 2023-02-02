@@ -44,7 +44,7 @@
                                 <p class="card-text show_txt">${book.description}</p>
                                 <div class="row">
                                     <div class="col">
-                                        <a href="" class="btn btn-danger btn-block">${book.price} $</a>
+                                        <a href="/cart/add-to-cart?bid=${book.bookId}" class="btn btn-danger btn-block">${book.price} $</a>
                                     </div>
                                     <div class="col">
                                         <button onclick="addToCart(${book.bookId})" class="btn btn-success btn-block">

@@ -16,4 +16,6 @@ public interface UserService {
     List<User> findAll();
 
     void deleteUserById(Long eid);
+
+    void buy(Integer total, User user);
 }

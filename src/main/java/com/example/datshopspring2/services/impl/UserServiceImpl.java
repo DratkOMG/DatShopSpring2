@@ -53,6 +53,12 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(eid);
     }
 
+    @Override
+    public void buy(Integer total, User user) {
+        user.setBalance(user.getBalance() + total);
+        userRepository.save(user);
+    }
+
 
     private void changeAge(Integer age, Model model, User user) {
         String email = user.getEmail();

@@ -102,8 +102,7 @@
             <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
                 <div class="card-body p-4">
                     <#if account??>
-                    <form action="/cart/buy-product?total=${total + 3}"/>
-                    " method="post">
+                    <form action="/cart/buy-product?total=${total + 3}" method="post">
 
                     <#else>
                     <form action="/sign-in" method="get">

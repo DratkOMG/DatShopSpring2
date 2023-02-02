@@ -2,6 +2,9 @@ package com.example.datshopspring2.controllers;
 
 import com.example.datshopspring2.models.Account;
 import com.example.datshopspring2.services.AccountService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +22,7 @@ public class SignInController {
     private AccountService accountService;
 
     @GetMapping
-    public String getSignInPage(HttpSession session, Model model) {
+    public String getSignInPage(HttpSession session, Model model, HttpServletRequest request) {
         if (model.getAttribute("account") != null) {
             session.removeAttribute("account");
             session.removeAttribute("seller");
@@ -30,12 +33,25 @@ public class SignInController {
 
             return "redirect:/home";
         }
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("acc")) {
+                model.addAttribute("email", cookie.getValue());
+            }
+            if (cookie.getName().equals("pass")) {
+                model.addAttribute("password", cookie.getValue());
+            }
+            if (cookie.getName().equals("rem")) {
+                model.addAttribute("remember", cookie.getValue());
+            }
+        }
         return "/login/login";
     }
 
     @PostMapping
-    public String login(String email, String password, String remember, Model model) {
-        if (accountService.signIn(email, password, remember, model)) {
+    public String login(String email, String password, String remember,
+                        Model model, HttpServletResponse response, HttpServletRequest request) {
+        if (accountService.signIn(email, password, remember, model, response, request)) {
             Account account = accountService.findAccountByEmail(email);
             model.addAttribute("account", account.getAccountId());
             model.addAttribute("seller", account.getIsSeller());

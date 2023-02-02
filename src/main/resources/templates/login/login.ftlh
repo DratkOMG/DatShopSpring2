@@ -15,13 +15,13 @@
 <div id="logreg-forms">
     <form action="/sign-in" method="post" class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
-        <input type="email" name="email" value="" id="inputEmail" class="form-control"
+        <input type="email" name="email" value="<#if email??>${email}</#if>" id="inputEmail" class="form-control"
                placeholder="Email address" required="" autofocus="">
-        <input type="password" name="password" value="" id="inputPassword" class="form-control"
+        <input type="password" name="password" value="<#if password??>${password}</#if>" id="inputPassword" class="form-control"
                placeholder="Password" required="">
 
         <div class="form-group form-check">
-            <input name="remember" type="checkbox" <#--${cookie.remember == null?"":"checked"}-->
+            <input name="remember" type="checkbox" <#if remember??>checked</#if>
                    class="form-check-input"
                    id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Remember me</label>

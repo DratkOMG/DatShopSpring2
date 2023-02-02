@@ -8,6 +8,8 @@ import com.example.datshopspring2.services.AccountService;
 import com.example.datshopspring2.services.BookService;
 import com.example.datshopspring2.services.CategoriesService;
 import com.example.datshopspring2.services.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,10 +34,22 @@ public class HomeController {
     private LeftShow leftShow;
 
     @RequestMapping
-    public String getHomePage(Model model) {
+    public String getHomePage(Model model, HttpServletRequest request) {
         leftShow.show(model);
         List<Book> bookList = bookService.findTop12();
         model.addAttribute("listBook", bookList);
+
+        Cookie[] cookies = request.getCookies();
+
+        int countProduct = 0;
+        for (Cookie cookie: cookies) {
+            if (cookie.getName().startsWith("BookAdded")) {
+                countProduct++;
+            }
+        }
+
+        model.addAttribute("countProduct", countProduct);
+
         return "/views/home_page";
     }
 

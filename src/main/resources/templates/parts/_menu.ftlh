@@ -75,7 +75,8 @@
                 <form action="/cart" method="get">
                     <button type="submit" class="btn btn-success btn-sm ml-3" onclick="">
                         <i class="fa fa-shopping-cart"></i> Cart
-                        <span class="badge badge-light" id="count-product"> </span>
+                        <span class="badge badge-light"
+                              id="count-product"><#if countProduct??>${countProduct}</#if></span>
                     </button>
                 </form>
             </div>

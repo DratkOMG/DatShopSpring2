@@ -103,7 +103,7 @@
 
                                 <hr>
 
-                                <a href="" class="btn btn-lg btn-primary text-uppercase"> Buy now </a>
+                                <a href="/cart/add-to-cart?bid=${book.bookId}" class="btn btn-lg btn-primary text-uppercase"> Buy now </a>
 
                                 <button onclick="addToCart(${book.bookId})"
                                         class="btn btn-lg btn-outline-primary text-uppercase">

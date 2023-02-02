@@ -3,7 +3,9 @@ package com.example.datshopspring2.services.impl;
 import com.example.datshopspring2.models.Account;
 import com.example.datshopspring2.models.Book;
 import com.example.datshopspring2.models.Order;
+import com.example.datshopspring2.models.OrderInformation;
 import com.example.datshopspring2.repositories.AccountRepository;
+import com.example.datshopspring2.repositories.OrderInformationRepository;
 import com.example.datshopspring2.repositories.OrderRepository;
 import com.example.datshopspring2.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private OrderInformationRepository orderInformationRepository;
+
     @Override
     public List<Order> findAllOrderByUserId(Long id) {
         Account account = accountRepository.findAccountByAccountId(id);
@@ -29,4 +34,22 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findAll();
     }
 
+    @Override
+    public long saveOrder(Order order) {
+        return orderRepository.save(order).getId();
+    }
+
+    @Override
+    public void saveInformationOrder(long orderId, List<Book> bookList, List<Integer> quantity) {
+        for (int i = 0; i < bookList.size(); i++) {
+            OrderInformation orderInformation = OrderInformation.builder()
+                    .order(orderRepository.findById(orderId).get())
+                    .title(bookList.get(i).getTitle())
+                    .image(bookList.get(i).getImage())
+                    .price(bookList.get(i).getPrice() * quantity.get(i))
+                    .quantity(quantity.get(i))
+                    .build();
+            orderInformationRepository.save(orderInformation);
+        }
+    }
 }
