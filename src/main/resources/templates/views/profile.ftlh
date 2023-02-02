@@ -32,7 +32,7 @@
                     </#if>
 
                     <button type="submit" class="btn btn-success">
-                        <i class="material-icons">&#xE147;</i>
+                        <i class="material-icons"></i>
                         <span>Donate</span></button>
                 </form>
 
