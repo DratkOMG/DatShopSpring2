@@ -33,30 +33,32 @@
                         <div class="form-group">
                             <label>Title </label>
                             <input name="title" value="<#if title??>${title}</#if>" type="text" class="form-control"
-                                   required>
+                                   required placeholder="For example: The Alchemist, The One Thing, ...">
                             <p class="ui-state-error-text"><#if errorTitle??>${errorTitle}</#if></p>
                         </div>
                         <div class="form-group">
                             <label>Image </label>
                             <input name="image" value="<#if image??>${image}</#if>" type="text" class="form-control"
-                                   required>
+                                   required
+                                   placeholder="Link! For example: https://m.media-amazon.com/images/I/81UZJqFG7VL.jpg">
                             <p class="ui-state-error-text"><#if errorImage??>${errorImage}</#if></p>
                         </div>
                         <div class="form-group">
                             <label>Price </label>
                             <input name="price" value="<#if price??>${price}</#if>" type="number" class="form-control"
-                                   required>
+                                   required placeholder="For example: 300, 100, ...">
                             <p class="ui-state-error-text"><#if errorPrice??>${errorPrice}</#if></p>
                         </div>
                         <div class="form-group">
                             <label>Author </label>
-                            <input name="author" value="<#if author??>${author}</#if>" class="form-control" required>
+                            <input name="author" value="<#if author??>${author}</#if>" class="form-control"
+                                   required placeholder="For example: Mario Puzo, ...">
                             <p class="ui-state-error-text"><#if errorAuthor??>${errorAuthor}</#if></p>
                         </div>
                         <div class="form-group">
                             <label>Description </label>
-                            <textarea name="description" class="form-control"
-                                      required><#if description??>${description}</#if></textarea>
+                            <textarea name="description" class="form-control" required
+                                      placeholder="For example: Stop worrying and take the steps to a happier, more fulfilling life!"><#if description??>${description}</#if></textarea>
                             <p class="ui-state-error-text"><#if errorDescription??>${errorDescription}</#if></p>
                         </div>
                         <div class="form-group">
