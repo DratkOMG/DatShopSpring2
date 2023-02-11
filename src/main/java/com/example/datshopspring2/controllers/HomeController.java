@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping({"/home", "/"})
 @SessionAttributes({"account", "seller", "admin"})
 public class HomeController {
     @Autowired
