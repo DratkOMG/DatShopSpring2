@@ -20,27 +20,28 @@ public class SessionFilter implements Filter {
         HttpSession session = httpServletRequest.getSession();
         String url = httpServletRequest.getServletPath();
         System.out.println(session.getAttribute("account"));
-
-        if (session.getAttribute("admin") == null || session.getAttribute("admin").equals(false)) {
-            if (url.startsWith("/manage-employees") || url.equals("/purchase-history/global-history")) {
+        if (session.getAttribute("account") == null) {
+            if (url.equals("/profile") || url.equals("/purchase-history")) {
                 httpServletResponse.sendRedirect("/home");
                 return;
             }
-            if (session.getAttribute("seller") == null || session.getAttribute("seller").equals(false)) {
-                if (url.equals("/manage-product")) {
-                    httpServletResponse.sendRedirect("/home");
-                    return;
-                }
+
+        } else {
+            if (url.equals("/sign-in") || url.equals("/sign-up")) {
+                httpServletResponse.sendRedirect("/home");
+                return;
             }
-            if (session.getAttribute("account") == null) {
-                if (url.equals("/profile") || url.equals("/purchase-history")) {
+
+            if (session.getAttribute("admin") == null || session.getAttribute("admin").equals(false)) {
+                if (url.startsWith("/manage-employees") || url.equals("/purchase-history/global-history")) {
                     httpServletResponse.sendRedirect("/home");
                     return;
                 }
-            } else {
-                if (url.equals("/sign-in") || url.equals("/sign-up")) {
-                    httpServletResponse.sendRedirect("/home");
-                    return;
+                if (session.getAttribute("seller") == null || session.getAttribute("seller").equals(false)) {
+                    if (url.equals("/manage-product")) {
+                        httpServletResponse.sendRedirect("/home");
+                        return;
+                    }
                 }
             }
         }
