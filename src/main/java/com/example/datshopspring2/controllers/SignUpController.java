@@ -51,7 +51,7 @@ public class SignUpController {
                     .email(account.getEmail())
                     .password(account.getPassword())
                     .isAdmin(false)
-                    .isSeller(false)
+                    .isSeller(true)
                     .build();
             accountRepository.save(accountSave);
             User user = User.builder()

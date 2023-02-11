@@ -23,16 +23,6 @@ public class SignInController {
 
     @GetMapping
     public String getSignInPage(HttpSession session, Model model, HttpServletRequest request) {
-        if (model.getAttribute("account") != null) {
-            session.removeAttribute("account");
-            session.removeAttribute("seller");
-            session.removeAttribute("admin");
-            model.asMap().remove("account");
-            model.asMap().remove("seller");
-            model.asMap().remove("admin");
-
-            return "redirect:/home";
-        }
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("acc")) {
@@ -44,6 +34,21 @@ public class SignInController {
             if (cookie.getName().equals("rem")) {
                 model.addAttribute("remember", cookie.getValue());
             }
+        }
+        return "/login/login";
+    }
+
+    @GetMapping("/log-out")
+    public String logout(HttpSession session, Model model) {
+        if (model.getAttribute("account") != null) {
+            session.removeAttribute("account");
+            session.removeAttribute("seller");
+            session.removeAttribute("admin");
+            model.asMap().remove("account");
+            model.asMap().remove("seller");
+            model.asMap().remove("admin");
+
+            return "redirect:/home";
         }
         return "/login/login";
     }

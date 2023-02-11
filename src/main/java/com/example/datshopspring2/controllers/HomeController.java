@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -42,13 +43,15 @@ public class HomeController {
         Cookie[] cookies = request.getCookies();
 
         int countProduct = 0;
-        for (Cookie cookie: cookies) {
-            if (cookie.getName().startsWith("BookAdded")) {
-                countProduct++;
+        if (cookies != null) {
+            for (Cookie cookie: cookies) {
+                if (cookie.getName().startsWith("BookAdded")) {
+                    countProduct++;
+                }
             }
-        }
 
-        model.addAttribute("countProduct", countProduct);
+            model.addAttribute("countProduct", countProduct);
+        }
 
         return "/views/home_page";
     }

@@ -25,7 +25,7 @@
 
                 <#if account??>
                     <li class="nav-item">
-                        <a class="nav-link" href="/sign-in">
+                        <a class="nav-link" href="/sign-in/log-out">
                             Logout
                         </a>
                     </li>
