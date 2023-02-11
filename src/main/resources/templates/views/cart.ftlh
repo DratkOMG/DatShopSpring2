@@ -1,7 +1,7 @@
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -199,7 +199,6 @@
                                         <span id="check-out">$<#if total??>${total + 3}</#if></span>
                                     </div>
                                 </button>
-
 
                             </div>
                         </div>

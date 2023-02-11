@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -69,13 +70,13 @@ public class CartController {
     }
 
     @PostMapping("/buy-product")
-    private String buyProduct(Integer total, HttpServletRequest request, HttpServletResponse response, Model model) {
+    private String buyProduct(Integer total, HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes) {
         total = -total;
 
         User user = userService.findUserByUserId((Long) model.getAttribute("account"));
 
         if (user.getBalance() < (-total)) {
-            request.setAttribute("errorBuy", "Money??");
+            redirectAttributes.addFlashAttribute("errorBuy", "Money??");
             return "redirect:/cart";
         } else {
             userService.buy(total, user);
