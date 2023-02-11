@@ -21,13 +21,13 @@ public class SessionFilter implements Filter {
         String url = httpServletRequest.getServletPath();
         System.out.println(session.getAttribute("account"));
         if (session.getAttribute("account") == null) {
-            if (url.equals("/profile") || url.equals("/purchase-history")) {
+            if (url.startsWith("/profile") || url.startsWith("/purchase-history") || url.startsWith("/manage-employees") || url.startsWith("/manage-product")) {
                 httpServletResponse.sendRedirect("/home");
                 return;
             }
 
         } else {
-            if (url.equals("/sign-in") || url.equals("/sign-up")) {
+            if (url.startsWith("/sign-in") || url.startsWith("/sign-up")) {
                 httpServletResponse.sendRedirect("/home");
                 return;
             }
@@ -38,7 +38,7 @@ public class SessionFilter implements Filter {
                     return;
                 }
                 if (session.getAttribute("seller") == null || session.getAttribute("seller").equals(false)) {
-                    if (url.equals("/manage-product")) {
+                    if (url.startsWith("/manage-product")) {
                         httpServletResponse.sendRedirect("/home");
                         return;
                     }
