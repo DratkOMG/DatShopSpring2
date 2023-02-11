@@ -27,7 +27,7 @@ public class SessionFilter implements Filter {
             }
 
         } else {
-            if (url.startsWith("/sign-in") || url.startsWith("/sign-up")) {
+            if (url.equals("/sign-in") || url.equals("/sign-up")) {
                 httpServletResponse.sendRedirect("/home");
                 return;
             }
