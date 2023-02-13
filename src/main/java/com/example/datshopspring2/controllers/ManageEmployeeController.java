@@ -70,7 +70,6 @@ public class ManageEmployeeController {
     @PostMapping("/edit-employee")
     private String editEmployee(Long eid, String isSeller) {
         accountService.updateSeller(eid, isSeller);
-        System.out.println(isSeller);
         return "redirect:/manage-employees";
     }
 

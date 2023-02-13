@@ -74,8 +74,9 @@
 
                                     <input id="amount${book.bookId}"
                                            onkeyup="update(this, ${book.price}, ${book.bookId})"
+                                           oninput="validity.valid||(value='');"
                                            value="${book.quantitySold}"
-                                           min="0" name="quantity" type="number"
+                                           name="quantity" type="number"
                                            class="form-control form-control-sm" style="width: 50px;"/>
 
                                 </div>

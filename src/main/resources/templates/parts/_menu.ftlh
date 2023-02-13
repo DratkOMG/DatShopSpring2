@@ -72,7 +72,7 @@
                     <input oninput="liveSearch(this)" name="search" type="text" class="from-control" aria-label="Small"
                            aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
                 </div>
-                <form action="/cart" method="get">
+                <form action="/cart" method="post">
                     <button type="submit" class="btn btn-success btn-sm ml-3" onclick="">
                         <i class="fa fa-shopping-cart"></i> Cart
                         <span class="badge badge-light"

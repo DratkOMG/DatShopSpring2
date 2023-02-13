@@ -98,6 +98,7 @@ public class CartController {
                     bookList.add(bookService.findBookByBookId(Long.parseLong(cookie.getName().substring(9))));
                     quantity.add(Integer.valueOf(cookie.getValue()));
                     cookie.setMaxAge(0);
+                    cookie.setPath("/");
                     response.addCookie(cookie);
                 }
             }
@@ -147,6 +148,7 @@ public class CartController {
         boolean cookieExist = false;
         for (Cookie cookie: cookies) {
             if (cookie.getName().equals(book)) {
+                cookie.setPath("/");
                 cookie.setValue(String.valueOf(Integer.parseInt(cookie.getValue()) + 1));
                 cookieExist = true;
                 response.addCookie(cookie);
@@ -158,6 +160,7 @@ public class CartController {
         }
         if (!cookieExist) {
             Cookie cookieBook = new Cookie(book, "1");
+            cookieBook.setPath("/");
             count++;
             response.addCookie(cookieBook);
         }

@@ -19,7 +19,6 @@ public class SessionFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         HttpSession session = httpServletRequest.getSession();
         String url = httpServletRequest.getServletPath();
-        System.out.println(session.getAttribute("account"));
         if (session.getAttribute("account") == null) {
             if (url.startsWith("/profile") || url.startsWith("/purchase-history") || url.startsWith("/manage-employees") || url.startsWith("/manage-product")) {
                 httpServletResponse.sendRedirect("/home");
