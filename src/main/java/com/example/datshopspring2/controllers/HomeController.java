@@ -40,6 +40,22 @@ public class HomeController {
         List<Book> bookList = bookService.findTop12();
         model.addAttribute("listBook", bookList);
 
+        getBookInCookie(model, request);
+
+        return "/views/home_page";
+    }
+
+    @RequestMapping("/category")
+    public String getBooksByCategory(Model model, @RequestParam("cid") Long categoriesId, HttpServletRequest request) {
+        leftShow.show(model);
+        Categories categories = categoriesService.findByCategoriesId(categoriesId);
+        List<Book> bookList = bookService.findAllByCategoriesId(categories);
+        getBookInCookie(model, request);
+        model.addAttribute("listBook", bookList);
+        return "/views/home_page";
+    }
+
+    private static void getBookInCookie(Model model, HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
 
         int countProduct = 0;
@@ -52,18 +68,6 @@ public class HomeController {
 
             model.addAttribute("countProduct", countProduct);
         }
-
-        return "/views/home_page";
-    }
-
-    @RequestMapping("/category")
-    public String getBooksByCategory(Model model, @RequestParam("cid") Long categoriesId) {
-        leftShow.show(model);
-        Categories categories = categoriesService.findByCategoriesId(categoriesId);
-        List<Book> bookList = bookService.findAllByCategoriesId(categories);
-
-        model.addAttribute("listBook", bookList);
-        return "/views/home_page";
     }
 
     @RequestMapping("/show-book")
