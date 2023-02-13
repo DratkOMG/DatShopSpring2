@@ -71,11 +71,12 @@ public class HomeController {
     }
 
     @RequestMapping("/show-book")
-    private String showBookPage(Model model, @RequestParam("bid") Long bookId) {
+    private String showBookPage(Model model, @RequestParam("bid") Long bookId, HttpServletRequest request) {
         leftShow.show(model);
 
         Book book = bookService.findBookByBookId(bookId);
         model.addAttribute("book", book);
+        getBookInCookie(model, request);
 
         User sellerName = userService.findUserByUserId(book.getSeller().getAccountId());
         model.addAttribute("sellerIs", sellerName);
@@ -83,11 +84,12 @@ public class HomeController {
     }
 
     @RequestMapping("/book-by")
-    private String showBooksByUserId(Model model, @RequestParam("uid") Long sellerId) {
+    private String showBooksByUserId(Model model, @RequestParam("uid") Long sellerId, HttpServletRequest request) {
         leftShow.show(model);
         Account account = accountService.findAccountByAccountId(sellerId);
         List<Book> bookList = bookService.findBooksBySeller(account);
         model.addAttribute("listBook", bookList);
+        getBookInCookie(model, request);
 
         return "/views/home_page";
 
