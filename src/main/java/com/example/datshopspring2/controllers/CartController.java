@@ -117,6 +117,7 @@ public class CartController {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals(book)) {
                 cookie.setMaxAge(0);
+                cookie.setPath("/");
                 response.addCookie(cookie);
             }
         }
